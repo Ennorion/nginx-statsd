@@ -509,7 +509,7 @@ ngx_http_statsd_set_server(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
     }
 
     int statsd_port_override = STATSD_DEFAULT_PORT;
-    if (value[2].len <= 0) {
+    if (cf->args->nelts == 2) {
       statsd_port_override = STATSD_DEFAULT_PORT;
     }
     else if (ngx_strcmp(value[2].data, "default") == 0) {
