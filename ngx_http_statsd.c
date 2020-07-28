@@ -510,13 +510,10 @@ ngx_http_statsd_set_server(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
 
     int statsd_port_override = STATSD_DEFAULT_PORT;
     if (value[2].len <= 0) {
-      statsd_port_override = STATSD_DEFAULT_PORT;
+      statsd_port_override = ngx_atoi(value[2].data, value[2].len);
     }
     else if (ngx_strcmp(value[2].data, "default") == 0) {
       statsd_port_override = STATSD_DEFAULT_PORT;
-    }
-    else {
-      statsd_port_override = ngx_atoi(value[2].data, value[2].len);
     }
 
     ngx_log_debug1(NGX_LOG_DEBUG_HTTP, cf->log, 0,
